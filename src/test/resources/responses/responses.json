@@ -1,0 +1,18 @@
+{
+  "helloworld.Greeter": {
+    "sayHello": {
+      "{\"name\":\"World\"}": {
+        "message": "Hello World!"
+      },
+      "{\"name\":\"John\"}": {
+        "message": "Hello John, how are you today?"
+      },
+      "{\"name\":\"Alice\"}": {
+        "message": "Hi Alice! Welcome back."
+      }
+    },
+    "sayGoodbye": {
+      "message": "Goodbye!"
+    }
+  }
+}
