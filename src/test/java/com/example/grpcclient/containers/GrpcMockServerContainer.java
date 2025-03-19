@@ -49,7 +49,7 @@ public class GrpcMockServerContainer extends GenericContainer<GrpcMockServerCont
         );
         
         // Wait for the container to be ready
-        waitingFor(Wait.forLogMessage(".*server running.*\\n", 1)
+        waitingFor(Wait.forLogMessage(".*server started.*\\n", 1)
                 .withStartupTimeout(Duration.ofSeconds(25)));
         
     }

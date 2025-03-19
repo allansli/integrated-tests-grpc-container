@@ -12,7 +12,9 @@
       }
     },
     "sayGoodbye": {
-      "message": "Goodbye!"
+      "{\"name\":\"John\"}": {
+        "message": "Goodbye!"
+      }
     }
   }
 }
