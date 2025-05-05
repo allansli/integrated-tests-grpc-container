@@ -1,7 +1,13 @@
 package com.example.grpcclient.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
+@Schema(description = "Request object for the goodbye endpoint")
 public class GoodbyeRequest {
+    @Schema(description = "Name of the person to say goodbye to", example = "John", required = true)
     private String name;
+    
+    @Schema(description = "Whether to use formal language in the goodbye message", example = "true", defaultValue = "false")
     private boolean formal;
 
     public GoodbyeRequest() {

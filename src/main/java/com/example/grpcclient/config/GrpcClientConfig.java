@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 
 import javax.annotation.PreDestroy;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 @Configuration
@@ -63,13 +64,13 @@ public class GrpcClientConfig {
                 logger.info("System property: {} = {}", key, value);
             }
         });
-        
+
         // Always use the latest host and port from system properties
         String effectiveHost = getEffectiveHost();
         int effectivePort = getEffectivePort();
-        
+
         logger.info("Creating gRPC channel to {}:{}", effectiveHost, effectivePort);
-        
+
         // Close any existing channel before creating a new one
         if (channel != null) {
             try {
@@ -80,8 +81,10 @@ public class GrpcClientConfig {
                 logger.error("Error shutting down channel", e);
             }
         }
-        
+
+        // Use virtual threads for gRPC calls
         channel = ManagedChannelBuilder.forAddress(effectiveHost, effectivePort)
+                .executor(Executors.newVirtualThreadPerTaskExecutor())
                 .usePlaintext()
                 .build();
         logger.info("Successfully created gRPC channel to {}:{}", effectiveHost, effectivePort);

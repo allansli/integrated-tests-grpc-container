@@ -8,6 +8,11 @@ Feature: Greeter Service Integration Tests
     When I send a hello request with name "John"
     Then I should receive a hello response containing "John"
 
+  Scenario: Say hello to a world
+    Given the gRPC server is running
+    When I send a hello request with name "World"
+    Then I should receive a hello response containing "Hello World!"
+
   Scenario: Say formal goodbye to a user
     Given the gRPC server is running
     When I send a formal goodbye request with name "John"
@@ -25,3 +30,8 @@ Feature: Greeter Service Integration Tests
     Then I should receive a hello response containing "This is an overridden response!"
     When I send a hello request with name "John" again
     Then I should receive a hello response containing "John"
+    When I set an override response for the "sayHello" method with message "This is an overridden response! Second one."
+    And I send a hello request with name "Alice"
+    Then I should receive a hello response containing "This is an overridden response! Second one."
+    When I send a hello request with name "Alice" again
+    Then I should receive a hello response containing "Alice"
